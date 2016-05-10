@@ -1,0 +1,18 @@
+---
+- hosts: all
+  user: vagrant
+  gather_facts: True
+  tasks:
+    - name: Install packages
+      action: apt update_cache=yes pkg={{item}} state=installed
+      with_items:
+      - mongodb      
+
+    - name: Ensure Mongodb is running
+      service: name=mongodb state=started
+
+    - name: Precreate a db
+      command: mongo mydb --eval "db.createCollection('mycollection')"
+
+    - name: Ensure Mongodb starts on boot
+      command: update-rc.d mongodb defaults 
