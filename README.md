@@ -4,7 +4,7 @@
 
 `cd mongocluster`
 
-`vagrant up`
+`./init.sh`
 
 
 # Set Up
@@ -19,40 +19,6 @@
 | shard1     | Shard server  |
 | shard2     | Shard server  |
 | shard3     | Shard server  |
-
-
-### Config Servers
-
-* Run these commands on `configsvr1`, `configsvr2`, `configsvr3`
-
-##### ssh in
-
-`vagrant ssh configsvr1`
-
-##### create a metadata directory
-
-`sudo mkdir -p /data/configdb`
-
-##### start up the configuration server
-
-`sudo mongod --configsvr --dbpath /data/configdb --port 27019`
-
-
-### Query Routers
-
-* Run these commands on `query1` and `query2`
-
-##### ssh in
-
-`vagrant ssh query1`
-
-##### stop mongodb
-
-`sudo service mongodb stop`
-
-##### start the query router service
-
-`sudo mongos --configdb 192.168.50.10:27019,192.168.50.11:27019,192.168.50.12:27019`
 
 
 ### Add Shards to Cluster
