@@ -8,6 +8,9 @@
       with_items:
       - mongodb      
 
+    - name: Ensure localhost is not binded
+      template: src=templates/mongodb.conf dest=/etc/mongodb.conf
+
     - name: Ensure Mongodb is running
       service: name=mongodb state=started
 
@@ -15,4 +18,4 @@
       command: mongo mydb --eval "db.createCollection('mycollection')"
 
     - name: Ensure Mongodb starts on boot
-      command: update-rc.d mongodb defaults 
+      command: update-rc.d mongodb defaults
